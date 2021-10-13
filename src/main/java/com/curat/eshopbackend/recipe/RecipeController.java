@@ -28,4 +28,14 @@ public class RecipeController {
         return recipeService.getRecipeById(id);
     }
 
+    @DeleteMapping("delete/{id}")
+    public Boolean deleteRecipe(@PathVariable Integer id) {
+        if( id == null) {
+            return Boolean.FALSE;
+        }
+        return recipeService.deleteRecipe(id);
+    }
+
+//    TODO update recipe
+
 }

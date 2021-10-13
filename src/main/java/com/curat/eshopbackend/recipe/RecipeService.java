@@ -26,6 +26,15 @@ public class RecipeService {
                 .orElseThrow(() -> new Exception(String.format("Recipe with id %d not found!", id)));
     }
 
+    public Boolean deleteRecipe(Integer id) {
+        try {
+            recipeRepository.deleteById(id);
+
+        } catch(Exception exception) {
+            return Boolean.FALSE;
+        }
+        return Boolean.TRUE;
+    }
 
 
 

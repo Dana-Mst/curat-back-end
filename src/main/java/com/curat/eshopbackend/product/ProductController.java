@@ -33,6 +33,9 @@ public class ProductController {
 
     @DeleteMapping("/delete/{id}")
     public Boolean deleteProduct(@PathVariable UUID id ) {
+        if( id == null) {
+            return Boolean.FALSE;
+        }
         return productService.deleteProduct(id);
     }
 
