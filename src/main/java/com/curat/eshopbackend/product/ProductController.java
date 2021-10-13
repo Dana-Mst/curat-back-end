@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @CrossOrigin
@@ -25,17 +24,24 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public Product getProduct(@PathVariable UUID id) throws Exception {
+    public Product getProduct(@PathVariable Long id) throws Exception {
         return productService.getProduct(id);
+    }
+
+    @GetMapping("/category/{categoryName}")
+    public List<Product> findAllByCategory(@PathVariable String categoryName) {
+        return productService.findAllByCategory(categoryName);
+    }
+
+    @GetMapping("/search")
+    public List<Product> findByNameContaining(@RequestParam String searchName) {
+        return productService.findByNameContaining(searchName);
     }
 
     //TODO delete product -validations
 
     @DeleteMapping("/delete/{id}")
-    public Boolean deleteProduct(@PathVariable UUID id ) {
-        if( id == null) {
-            return Boolean.FALSE;
-        }
+    public Boolean deleteProduct(@PathVariable Long id ) {
         return productService.deleteProduct(id);
     }
 

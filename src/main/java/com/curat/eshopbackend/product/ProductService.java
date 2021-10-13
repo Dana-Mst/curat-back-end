@@ -5,8 +5,8 @@ import com.curat.eshopbackend.category.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class ProductService {
@@ -22,7 +22,6 @@ public class ProductService {
 
         Product product = Product
                 .builder()
-                .id(UUID.randomUUID())
                 .category(category)
                 .description(request.getDescription())
                 .image(request.getImage())
@@ -38,14 +37,29 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Product getProduct(UUID id) throws Exception {
+    public Product getProduct(Long id) throws Exception {
 //TODO: Update not found exception
         return productRepository.findById(id).orElseThrow(() ->
                 new Exception(String.format("Product with id: %s not found", id))
         );
     }
 
-    public Boolean deleteProduct(UUID id) {
+    public List<Product> findByNameContaining(String searchName) {
+        return productRepository.findByNameContaining(searchName);
+    }
+
+    public List<Product> findAllByCategory(String categoryName) {
+        List<Product> productsByCategory = new ArrayList<>();
+        try{
+            Category category = categoryService.findByName(categoryName);
+            productsByCategory =  productRepository.findAllByCategory(category);
+        } catch(Exception exception) {
+//            TODO handle exception
+        }
+        return productsByCategory;
+    }
+
+    public Boolean deleteProduct(Long id) {
         try{
             productRepository.deleteById(id);
         } catch(Exception exception) {
