@@ -1,11 +1,10 @@
 package com.curat.eshopbackend.product;
 
 import com.curat.eshopbackend.category.Category;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-
-import java.util.UUID;
 
 @Data
 @Entity
@@ -15,11 +14,12 @@ import java.util.UUID;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
 
     @ManyToOne
+    @JsonIgnore
     private Category category;
 
     private Integer price;
