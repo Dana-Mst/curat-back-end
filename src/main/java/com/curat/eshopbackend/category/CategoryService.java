@@ -22,4 +22,7 @@ public class CategoryService {
     }
 
 
+    public Category findByName(String categoryName) {
+        return categoryRepository.findByName(categoryName);
+    }
 }
