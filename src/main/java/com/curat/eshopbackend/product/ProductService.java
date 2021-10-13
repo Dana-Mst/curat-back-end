@@ -13,7 +13,6 @@ public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
-
     @Autowired
     private CategoryService categoryService;
 
@@ -44,5 +43,14 @@ public class ProductService {
         return productRepository.findById(id).orElseThrow(() ->
                 new Exception(String.format("Product with id: %s not found", id))
         );
+    }
+
+    public Boolean deleteProduct(UUID id) {
+        try{
+            productRepository.deleteById(id);
+        } catch(Exception exception) {
+            return Boolean.FALSE;
+        }
+        return Boolean.TRUE;
     }
 }

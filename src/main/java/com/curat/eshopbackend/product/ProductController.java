@@ -29,4 +29,13 @@ public class ProductController {
         return productService.getProduct(id);
     }
 
+    //TODO delete product -validations
+
+    @DeleteMapping("/delete/{id}")
+    public Boolean deleteProduct(@PathVariable UUID id ) {
+        return productService.deleteProduct(id);
+    }
+
+    //TODO update product
+
 }
