@@ -14,7 +14,8 @@ import javax.persistence.*;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "shop_seq_product")
+    @SequenceGenerator(name = "shop_seq_product", sequenceName = "SHOP_SEQ_PRODUCT", allocationSize = 1)
     private Long id;
     private String name;
 

@@ -2,10 +2,7 @@ package com.curat.eshopbackend.category;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -17,6 +14,7 @@ public class Category {
 
     private String name;
 
+    @Column(length = 1000)
     private String description;
 
     private String image;
