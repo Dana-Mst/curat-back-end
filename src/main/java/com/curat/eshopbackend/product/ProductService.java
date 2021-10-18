@@ -2,9 +2,15 @@ package com.curat.eshopbackend.product;
 
 import com.curat.eshopbackend.category.Category;
 import com.curat.eshopbackend.category.CategoryService;
+import com.curat.eshopbackend.image.FileStorageService;
+import com.curat.eshopbackend.image.exceptions.FileStorageException;
+import com.curat.eshopbackend.product.dto.AddProductDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,22 +21,42 @@ public class ProductService {
     private ProductRepository productRepository;
     @Autowired
     private CategoryService categoryService;
+    
+    @Autowired
+    private FileStorageService fileStorageService;
 
 
-    public void addProduct(AddProductRequest request) throws Exception {
-        Category category = categoryService.findById(request.getCategoryId());
 
-        Product product = Product
+
+    public void addProduct(String product, MultipartFile image) throws Exception {
+        AddProductDTO addProductDTO = new AddProductDTO();
+        try{
+            ObjectMapper objectMapper = new ObjectMapper();
+            addProductDTO = objectMapper.readValue(product, AddProductDTO.class);
+        } catch( IOException exception) {
+//            TODO implement Exception
+        }
+
+        StringBuilder str = new StringBuilder();
+        String productName = addProductDTO.getName();
+        String imageName = fileStorageService.storeFile(image, productName);
+
+              
+        
+        Category category = categoryService.findById(addProductDTO.getCategoryId());
+
+        Product productToSave = Product
                 .builder()
                 .category(category)
-                .description(request.getDescription())
-                .image(request.getImage())
-                .name(request.getName())
-                .price(request.getPrice())
-                .quantity(request.getQuantity())
+                .description(addProductDTO.getDescription())
+                .image(imageName)
+                .name(productName)
+                .price(addProductDTO.getPrice())
+                .quantity(addProductDTO.getQuantity())
                 .build();
 
-        productRepository.save(product);
+        productRepository.save(productToSave);
+
     }
 
     public List<Product> getAllProducts() {

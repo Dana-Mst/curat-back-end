@@ -1,7 +1,10 @@
 package com.curat.eshopbackend.product;
 
+import com.curat.eshopbackend.product.dto.AddProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -13,9 +16,9 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @PostMapping
-    public void addProduct(@RequestBody AddProductRequest product) throws Exception {
-        productService.addProduct(product);
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public void addProduct(@RequestPart("product") String product, @RequestPart("image") MultipartFile image ) throws Exception {
+        productService.addProduct(product, image);
     }
 
     @GetMapping
