@@ -3,11 +3,11 @@ package com.curat.eshopbackend.product;
 import com.curat.eshopbackend.category.Category;
 import com.curat.eshopbackend.category.CategoryService;
 import com.curat.eshopbackend.image.FileStorageService;
-import com.curat.eshopbackend.image.exceptions.FileStorageException;
 import com.curat.eshopbackend.product.dto.AddProductDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -29,7 +29,9 @@ public class ProductService {
 
 
     public void addProduct(String product, MultipartFile image) throws Exception {
+
         AddProductDTO addProductDTO = new AddProductDTO();
+
         try{
             ObjectMapper objectMapper = new ObjectMapper();
             addProductDTO = objectMapper.readValue(product, AddProductDTO.class);
@@ -37,12 +39,11 @@ public class ProductService {
 //            TODO implement Exception
         }
 
-        StringBuilder str = new StringBuilder();
+
+
         String productName = addProductDTO.getName();
         String imageName = fileStorageService.storeFile(image, productName);
 
-              
-        
         Category category = categoryService.findById(addProductDTO.getCategoryId());
 
         Product productToSave = Product
