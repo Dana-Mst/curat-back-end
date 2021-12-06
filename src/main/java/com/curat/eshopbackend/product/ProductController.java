@@ -1,9 +1,7 @@
 package com.curat.eshopbackend.product;
 
-import com.curat.eshopbackend.product.dto.AddProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 

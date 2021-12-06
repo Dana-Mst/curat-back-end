@@ -7,7 +7,6 @@ import com.curat.eshopbackend.product.dto.AddProductDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -38,8 +37,6 @@ public class ProductService {
         } catch( IOException exception) {
 //            TODO implement Exception
         }
-
-
 
         String productName = addProductDTO.getName();
         String imageName = fileStorageService.storeFile(image, productName);
