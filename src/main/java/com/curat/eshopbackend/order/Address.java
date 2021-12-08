@@ -1,4 +1,4 @@
-package com.curat.eshopbackend.order;
+/*package com.curat.eshopbackend.order;
 
 import com.curat.eshopbackend.user.UserModel;
 import lombok.Data;
@@ -24,4 +24,4 @@ public class Address {
 
 
 
-}
+}*/

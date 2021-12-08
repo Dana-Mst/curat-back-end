@@ -1,16 +1,19 @@
 package com.curat.eshopbackend.user;
 
 import com.curat.eshopbackend.cart.Cart;
-import com.curat.eshopbackend.order.Address;
-import com.curat.eshopbackend.order.Order;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserModel {
 
     @Id
@@ -25,12 +28,5 @@ public class UserModel {
 
     @OneToOne(mappedBy = "userModel")
     private Cart cart;
-
-    @OneToMany(mappedBy = "user")
-    private Set<Order> orders;
-
-    @OneToMany(mappedBy = "user")
-    private Set<Address> addresses;
-
 
 }

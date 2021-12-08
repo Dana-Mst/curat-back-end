@@ -20,11 +20,8 @@ public class ProductService {
     private ProductRepository productRepository;
     @Autowired
     private CategoryService categoryService;
-    
     @Autowired
     private FileStorageService fileStorageService;
-
-
 
 
     public void addProduct(String product, MultipartFile image) throws Exception {

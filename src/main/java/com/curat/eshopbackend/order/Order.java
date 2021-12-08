@@ -1,3 +1,4 @@
+/*
 package com.curat.eshopbackend.order;
 
 import com.curat.eshopbackend.user.UserModel;
@@ -24,3 +25,4 @@ public class Order {
 
 
 }
+*/

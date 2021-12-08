@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -19,15 +21,12 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "usermodel_id", referencedColumnName = "id")
+    @OneToMany
+    @JoinColumn(name="item_model_id")
+    private Set<ItemModel> itemList = new HashSet<>();
+
+    @OneToOne
+    @JoinColumn(name = "cart", referencedColumnName = "id")
     private UserModel userModel;
-
-
-
-
-
-
-
 
 }

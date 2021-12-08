@@ -19,4 +19,5 @@ public class ItemModel {
     private Long productId;
 
     private Integer quantity;
+
 }
